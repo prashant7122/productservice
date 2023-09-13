@@ -30,7 +30,8 @@ public class SelfProductServiceImp implements ProductService{
     }
 
     @Override
-    public GenericProductDto updateProductByID(Long id) {
+    public GenericProductDto updateProductByID(GenericProductDto genericProductDto, Long id) {
         return null;
     }
+
 }

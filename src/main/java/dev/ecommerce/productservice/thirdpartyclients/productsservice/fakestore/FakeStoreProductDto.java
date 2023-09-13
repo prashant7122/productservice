@@ -1,4 +1,4 @@
-package dev.ecommerce.productservice.dtos;
+package dev.ecommerce.productservice.thirdpartyclients.productsservice.fakestore;
 
 import dev.ecommerce.productservice.models.Category;
 import lombok.Getter;

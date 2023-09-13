@@ -5,6 +5,7 @@ import dev.ecommerce.productservice.dtos.GenericProductDto;
 import dev.ecommerce.productservice.exceptions.NotFoundException;
 import dev.ecommerce.productservice.models.Product;
 import dev.ecommerce.productservice.services.ProductService;
+import dev.ecommerce.productservice.thirdpartyclients.productsservice.fakestore.FakeStoreProductDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ public class ProductController {
     private ProductService productService;
 
     // Constructor Injection
-    public ProductController(@Qualifier("fakeStoreProductService") ProductService productService){
+    public ProductController( ProductService productService){
         this.productService = productService;
     }
 
@@ -59,7 +60,7 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public GenericProductDto updateProductByID(@PathVariable("id") Long id){
-        return productService.updateProductByID(id);
+    public GenericProductDto updateProductByID(@RequestBody GenericProductDto genericProductDto, @PathVariable("id") Long id){
+        return productService.updateProductByID(genericProductDto, id);
     }
 }
