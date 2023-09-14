@@ -2,6 +2,7 @@ package dev.ecommerce.productservice.thirdpartyclients.productsservice.fakestore
 
 import dev.ecommerce.productservice.dtos.GenericProductDto;
 import dev.ecommerce.productservice.exceptions.NotFoundException;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.ResponseExtractor;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,12 +21,24 @@ Wrapper of FakeStore API
 @Service
 public class FakeStoreProductServiceClient{
     private RestTemplateBuilder restTemplateBuilder;
-    private String specificProductRequestUrl = "https://fakestoreapi.com/products/{id}";
-    private String productRequestsBaseUrl = "https://fakestoreapi.com/products";
+
+    @Value("${fakestore.api.url}")
+    private  String fakeStoreApiUrl;
+
+    @Value("${fakestore.api.paths.product}")
+    private String fakeStoreProductsApiPath;
+
+    private String specificProductRequestUrl;
+    private String productRequestsBaseUrl;
 
 
-    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder){
+    public FakeStoreProductServiceClient(RestTemplateBuilder restTemplateBuilder,
+                                         @Value("${fakestore.api.url}") String fakeStoreApiUrl,
+                                         @Value("${fakestore.api.paths.product}")
+                                         String fakeStoreProductsApiPath){
         this.restTemplateBuilder = restTemplateBuilder;
+        this.specificProductRequestUrl =  fakeStoreApiUrl + fakeStoreProductsApiPath + "/{id}";
+        this.productRequestsBaseUrl = fakeStoreApiUrl + fakeStoreProductsApiPath;
     }
 
 
@@ -36,7 +48,7 @@ public class FakeStoreProductServiceClient{
         return response.getBody();
     }
 
-    public FakeStoreProductDto getProdcutById(Long id) throws NotFoundException {
+    public FakeStoreProductDto getProductById(Long id) throws NotFoundException {
 
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(specificProductRequestUrl, FakeStoreProductDto.class, id);

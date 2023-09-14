@@ -5,7 +5,6 @@ import dev.ecommerce.productservice.exceptions.NotFoundException;
 import dev.ecommerce.productservice.thirdpartyclients.productsservice.fakestore.FakeStoreProductDto;
 import dev.ecommerce.productservice.thirdpartyclients.productsservice.fakestore.FakeStoreProductServiceClient;
 import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class FakeStoreProductService implements ProductService{
     }
     @Override
     public GenericProductDto getProdcutById(Long id) throws NotFoundException {
-       return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.getProdcutById(id));
+       return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.getProductById(id));
     }
 
     @Override
