@@ -68,7 +68,6 @@ public class FakeStoreProductServiceClient{
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto[]> response =
                 restTemplate.getForEntity(productRequestsBaseUrl, FakeStoreProductDto[].class);
-
         return Arrays.stream(response.getBody()).toList();
     }
 

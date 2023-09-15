@@ -1,19 +1,13 @@
 package dev.ecommerce.productservice.controllers;
 
-import dev.ecommerce.productservice.dtos.ExceptionDto;
 import dev.ecommerce.productservice.dtos.GenericProductDto;
 import dev.ecommerce.productservice.exceptions.NotFoundException;
-import dev.ecommerce.productservice.models.Product;
 import dev.ecommerce.productservice.services.ProductService;
-import dev.ecommerce.productservice.thirdpartyclients.productsservice.fakestore.FakeStoreProductDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/products")
@@ -41,7 +35,7 @@ public class ProductController {
     // localhost:8080/products/{id}
     // localhost:8080/products/123
     @GetMapping("{id}")
-    public GenericProductDto getProdcutById(@PathVariable("id") Long id) throws NotFoundException {
+    public GenericProductDto getProductById(@PathVariable("id") Long id) throws NotFoundException {
         return productService.getProdcutById(id);
     }
 
