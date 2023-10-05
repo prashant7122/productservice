@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 /*
 Wrapper of FakeStore API
@@ -48,7 +49,7 @@ public class FakeStoreProductServiceClient{
         return response.getBody();
     }
 
-    public FakeStoreProductDto getProductById(Long id) throws NotFoundException {
+    public FakeStoreProductDto getProductById(UUID id) throws NotFoundException {
 
         RestTemplate restTemplate = restTemplateBuilder.build();
         ResponseEntity<FakeStoreProductDto> response = restTemplate.getForEntity(specificProductRequestUrl, FakeStoreProductDto.class, id);
@@ -72,7 +73,7 @@ public class FakeStoreProductServiceClient{
     }
 
 
-    public FakeStoreProductDto deleteProductById(Long id) {
+    public FakeStoreProductDto deleteProductById(UUID id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
         RequestCallback requestCallback = restTemplate.acceptHeaderRequestCallback(FakeStoreProductDto.class);
@@ -85,7 +86,7 @@ public class FakeStoreProductServiceClient{
     }
 
 
-    public FakeStoreProductDto updateProductByID(GenericProductDto genericProductDto, Long id) {
+    public FakeStoreProductDto updateProductByID(GenericProductDto genericProductDto, UUID id) {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
         RequestCallback requestCallback = restTemplate.httpEntityCallback(genericProductDto, FakeStoreProductDto.class);

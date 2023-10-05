@@ -4,17 +4,18 @@ import dev.ecommerce.productservice.dtos.GenericProductDto;
 import dev.ecommerce.productservice.exceptions.NotFoundException;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface ProductService {
 
     GenericProductDto createProduct(GenericProductDto product);
 
-    GenericProductDto getProdcutById(Long id) throws NotFoundException;
+    GenericProductDto getProductById(UUID id) throws NotFoundException;
 
     List<GenericProductDto> getAllProducts();
 
-    GenericProductDto deleteProductById(Long id);
+    GenericProductDto deleteProductById(UUID id);
 
-    GenericProductDto updateProductByID(GenericProductDto genericProductDto, Long id);
+    GenericProductDto updateProductByID(GenericProductDto genericProductDto, UUID id);
 
 }

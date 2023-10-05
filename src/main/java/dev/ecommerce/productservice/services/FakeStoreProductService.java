@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-@Primary
 @Service("fakeStoreProductService")
 public class FakeStoreProductService implements ProductService{
 
@@ -24,7 +24,7 @@ public class FakeStoreProductService implements ProductService{
     private GenericProductDto convertFakeStoreProductIntoGenericProduct(FakeStoreProductDto fakeStoreProductDto) {
 
         GenericProductDto product = new GenericProductDto();
-        product.setId(fakeStoreProductDto.getId());
+//        product.setId(fakeStoreProductDto.getId());
         product.setImage(fakeStoreProductDto.getImage());
         product.setDescription(fakeStoreProductDto.getDescription());
         product.setTitle(fakeStoreProductDto.getTitle());
@@ -39,7 +39,7 @@ public class FakeStoreProductService implements ProductService{
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.createProduct(product));
     }
     @Override
-    public GenericProductDto getProdcutById(Long id) throws NotFoundException {
+    public GenericProductDto getProductById(UUID id) throws NotFoundException {
        return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.getProductById(id));
     }
 
@@ -54,12 +54,12 @@ public class FakeStoreProductService implements ProductService{
     }
 
     @Override
-    public GenericProductDto deleteProductById(Long id) {
+    public GenericProductDto deleteProductById(UUID id) {
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.deleteProductById(id));
     }
 
     @Override
-    public GenericProductDto updateProductByID(GenericProductDto genericProductDto, Long id) {
+    public GenericProductDto updateProductByID(GenericProductDto genericProductDto, UUID id) {
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.updateProductByID(genericProductDto, id));
     }
 
