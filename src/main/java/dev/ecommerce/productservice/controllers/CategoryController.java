@@ -53,9 +53,9 @@ public class CategoryController {
         return categoryService.getAllCategories();
     }
 
-    @GetMapping("/category/{category}")
-    public List<GenericProductDto> getAllProductsByCategory(@PathVariable("category") String category){
-        return categoryService.getAllProductsByCategory(category);
+    @GetMapping("/name/{categoryName}")
+    public List<GenericProductDto> getAllProductsByCategory(@PathVariable("categoryName") String categoryName){
+        return categoryService.getAllProductsByCategory(categoryName);
     }
 
 

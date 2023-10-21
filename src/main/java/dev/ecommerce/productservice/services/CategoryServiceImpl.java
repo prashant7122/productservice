@@ -110,42 +110,23 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<GenericProductDto> getAllProductsByCategory(String category) {
-//        Optional<Category> optionalCategory = categoryRepository.findByName(category);
-//
-//        List<GenericProductDto> genericProductDtos = new ArrayList<>();
-//
-//        if(optionalCategory.isPresent()){
-//            List<Product> products = optionalCategory.get().getProducts();
-//
-//            for(Product product : products){
-//                GenericProductDto genericProductDto = new GenericProductDto();
-//                genericProductDto.setImage(product.getImage());
-//                genericProductDto.setCategory(product.getCategory().getName());
-//                genericProductDto.setDescription(product.getDescription());
-//                genericProductDto.setTitle(product.getTitle());
-//                genericProductDto.setPrice(product.getPrice().getPrice());
-//                genericProductDto.setId(product.getUuid());
-//                genericProductDtos.add(genericProductDto);
-//            }
-//        }
-//
-//        return genericProductDtos;
-//
-//        List<GenericProductDto> genericProductDtos = new ArrayList<>();
-//
-//        for(Product product : products){
-//            GenericProductDto genericProductDto = new GenericProductDto();
-//            genericProductDto.setCategory(product.getCategory().getName());
-//            genericProductDto.setTitle(product.getTitle());
-//            genericProductDto.setDescription(product.getDescription());
-//            genericProductDto.setId(product.getUuid());
-//            genericProductDto.setPrice(product.getPrice().getPrice());
-//            genericProductDto.setImage(product.getImage());
-//            genericProductDtos.add(genericProductDto);
-//        }
-//        return genericProductDtos;
-        return null;
+        Optional<Category> categoryOptional = categoryRepository.findByName(category);
+
+        List<GenericProductDto> genericProductDtos = new ArrayList<>();
+
+        if(categoryOptional.isPresent()) {
+            List<Product> products = categoryOptional.get().getProducts();
+            for (Product product : products) {
+                GenericProductDto genericProductDto  = new GenericProductDto();
+                genericProductDto.setId(product.getUuid());
+                genericProductDto.setImage(product.getImage());
+                genericProductDto.setDescription(product.getDescription());
+                genericProductDto.setTitle(product.getTitle());
+                genericProductDto.setPrice(product.getPrice().getPrice());
+                genericProductDto.setCategory(product.getCategory().getName());
+                genericProductDtos.add(genericProductDto);
+            }
+        }
+        return genericProductDtos;
     }
-
-
 }

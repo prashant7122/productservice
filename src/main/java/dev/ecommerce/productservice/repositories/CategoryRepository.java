@@ -1,7 +1,6 @@
 package dev.ecommerce.productservice.repositories;
 
 import dev.ecommerce.productservice.models.Category;
-import dev.ecommerce.productservice.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -12,6 +11,8 @@ public interface CategoryRepository
 extends JpaRepository<Category, UUID> {
 
     Optional<Category> findById(UUID uuid);
+
+    Optional<Category> findByName(String category);
 
     List<Category> findAllById(Iterable<UUID> uuids);
 
