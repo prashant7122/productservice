@@ -1,12 +1,16 @@
 package dev.ecommerce.productservice.controllers;
 
 import dev.ecommerce.productservice.dtos.GenericProductDto;
+import dev.ecommerce.productservice.dtos.ProductDto;
 import dev.ecommerce.productservice.exceptions.NotFoundException;
+import dev.ecommerce.productservice.models.Category;
+import dev.ecommerce.productservice.models.Product;
+import dev.ecommerce.productservice.repositories.CategoryRepository;
 import dev.ecommerce.productservice.repositories.ProductRepository;
+import dev.ecommerce.productservice.services.CategoryService;
 import dev.ecommerce.productservice.services.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +24,12 @@ public class ProductController {
     private ProductService productService;
     private ProductRepository productRepository;
 
+    private CategoryService categoryService;
+
+    private CategoryRepository categoryRepository;
+
     // Constructor Injection
-    public ProductController(ProductService productService, ProductRepository productRepository){
+    public ProductController(ProductService productService, ProductRepository productRepository, CategoryService categoryService, CategoryRepository categoryRepository){
         this.productService = productService;
         this.productRepository = productRepository;
     }
@@ -59,7 +67,8 @@ public class ProductController {
     }
 
     @PutMapping("{id}")
-    public GenericProductDto updateProductByID(@RequestBody GenericProductDto genericProductDto, @PathVariable("id") UUID id){
+    public GenericProductDto updateProductByID(@RequestBody GenericProductDto genericProductDto, @PathVariable("id") UUID id) throws NotFoundException {
         return productService.updateProductByID(genericProductDto, id);
     }
+
 }

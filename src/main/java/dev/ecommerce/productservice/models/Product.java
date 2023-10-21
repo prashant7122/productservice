@@ -3,6 +3,8 @@ package dev.ecommerce.productservice.models;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Getter
@@ -24,5 +26,8 @@ public class Product extends BaseModel {
     private Category category;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @JoinColumn
+//    @Fetch(FetchMode.JOIN)
     private Price price;
+
 }

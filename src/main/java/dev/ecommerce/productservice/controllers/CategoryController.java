@@ -1,13 +1,14 @@
 package dev.ecommerce.productservice.controllers;
 
+import dev.ecommerce.productservice.dtos.CategoryDto;
+import dev.ecommerce.productservice.dtos.GenericProductDto;
+import dev.ecommerce.productservice.dtos.GetProductTitlesRequestDto;
 import dev.ecommerce.productservice.dtos.ProductDto;
 import dev.ecommerce.productservice.models.Category;
 import dev.ecommerce.productservice.models.Product;
 import dev.ecommerce.productservice.services.CategoryService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,4 +41,22 @@ public class CategoryController {
 
         return productDtos;
     }
+
+    @GetMapping("/titles/")
+    public List<String> getProductTitles(@RequestBody GetProductTitlesRequestDto requestDto){
+        List<UUID> uuids = requestDto.getUuids();
+        return categoryService.getProductTitles(uuids);
+    }
+
+    @GetMapping
+    public List<String> getAllCategories(){
+        return categoryService.getAllCategories();
+    }
+
+    @GetMapping("/category/{category}")
+    public List<GenericProductDto> getAllProductsByCategory(@PathVariable("category") String category){
+        return categoryService.getAllProductsByCategory(category);
+    }
+
+
 }

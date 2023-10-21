@@ -1,11 +1,13 @@
 package dev.ecommerce.productservice.repositories;
 
+import dev.ecommerce.productservice.models.Category;
 import dev.ecommerce.productservice.models.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -14,7 +16,6 @@ extends JpaRepository<Product, UUID> {
 
     Product getProductByUuid(UUID uuid);
 
-    List<Product> findAll();
 
     Product findByTitleEquals(String title);
     Product findByTitleEqualsAndPrice_Price(String title, double price);
@@ -22,10 +23,17 @@ extends JpaRepository<Product, UUID> {
 
     void deleteById(UUID id);
 
-    Long countAllByPrice_Currency(String currency);
+    List<Product> findAllByCategoryIn(List<Category> categories);
+
+
+//    List<Product> findAllByCategory(Category category);
+
+    //    @Query("select Product from Product where Product.category.uuid in : uuids")
+//    List<Product> findAllByCategoryIn(List<UUID> uuids);
 
     @Query(value = CustomQueries.FIND_ALL_BY_TITLE,
             nativeQuery = true)
+
     List<Product> findAllByTitle(String title);
 
     //Hibernate Query Language -> Compile time safety

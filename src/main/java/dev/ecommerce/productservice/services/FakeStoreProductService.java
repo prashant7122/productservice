@@ -53,6 +53,11 @@ public class FakeStoreProductService implements ProductService{
         return genericProductDtos;
     }
 
+//    @Override
+//    public List<GenericProductDto> getAllProductsByCategory(String category) {
+//        return null;
+//    }
+
     @Override
     public GenericProductDto deleteProductById(UUID id) {
         return convertFakeStoreProductIntoGenericProduct(fakeStoreProductServiceClient.deleteProductById(id));
